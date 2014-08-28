@@ -1,0 +1,22 @@
+{
+  "name": "ehu-www",
+  "version": "0.0.0",
+  "authors": [
+    "James Deng <cnjamesdeng@gmail.com>"
+  ],
+  "description": "Ehu organization search engine.",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "angular": "~1.2.23",
+    "elasticsearch": "~2.4.0"
+  }
+}
