@@ -49,10 +49,18 @@
       </form>
     </div>
     </div>
+    
     <div class="container">
-      <div class="alert alert-success" ng-if="results">Get {{ results.total }} results.</div>
+        <div ng-if="results.length == 0" id="wall" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".item" }'>
+            @for(var i = 0; i < locals.hots.length; i++) {
+                var hot = locals.hots[i]._source;
+            <div class="item">@hot.name --- @hot.phone</div>
+            }
+        </div>
+
+      <div class="alert alert-success" ng-if="results">Get {{ results.length }} results.</div>
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="result in results.hits" ng-init="r = result._source">
+        <li class="list-group-item" ng-repeat="result in results" ng-init="r = result._source">
           <h3>{{ r.name }}</h3>
           <p><span class="glyphicon glyphicon-phone-alt"></span>{{ r.phone }}</p>
         </li>
@@ -65,6 +73,7 @@
     
     <script src='bower_components/angular/angular.js' type='text/javascript'></script>
     <script src='bower_components/elasticsearch/elasticsearch.angular.js' type='text/javascript'></script>
+    <script src="bower_components/masonry/masonry.js"></script>
     <script src='js/ehu.js' type='text/javascript'></script>
   </body>
 </html>

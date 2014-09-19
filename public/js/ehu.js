@@ -14,23 +14,16 @@ app.factory('EsClient', function (esFactory, HOST, PORT) {
   });
 });
 
-app.factory('Search', function(EsClient) {
+app.factory('Search', function($http) {
     function search(q) {
-      var promise = EsClient.search({
-                "index": indexName,
-                "type": docType,
-                "body": {
-                    "size": maxResultsSize,
-                    "query": {
-                        "match": {
-                            "_all": q
-                        }
-                    }
-                }
-            });
-      return promise.catch(function(err) {
-        console.error(err);
-        });
+      var promise = $http({method: 'POST', url: '/', params: {'q': q}});
+      return promise.error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.error(data);
+      }).then(function(response) {
+        return response.data;
+      });
     }
     return search;
 });
